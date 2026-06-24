@@ -4,3 +4,5 @@ todos.db
 *.db-wal
 *.db-shm
 coverage/
+vue-frontend/dist/
+go-backend/server

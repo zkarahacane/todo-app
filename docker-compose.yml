@@ -34,6 +34,30 @@ services:
     networks:
       - todo-net
 
+  go-backend:
+    build: ./go-backend
+    container_name: todo-go-backend
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://todo:todo@postgres:5432/todo
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - todo-net
+
+  vue-frontend:
+    build: ./vue-frontend
+    container_name: todo-vue-frontend
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+    networks:
+      - todo-net
+
 volumes:
   postgres_data:
 
